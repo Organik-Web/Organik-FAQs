@@ -15,7 +15,7 @@ class Organik_FAQs_Categories {
 	public function __construct() {
 
 		// Register taxonomies
-		add_action( 'init', array( $this, 'orgnk_faq_categories_register_taxonomy'), 0 );
+		add_action( 'init', array( $this, 'orgnk_faq_categories_register_taxonomy') );
 	}
 
 	/**

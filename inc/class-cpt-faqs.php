@@ -8,16 +8,6 @@ define( 'ORGNK_FAQS_PLURAL_NAME', 'FAQs' );
 define( 'ORGNK_FAQS_SHORTCODE_NAME', 'faqs' );
 
 /**
- * Define permalinks
- */
-$archive_page_id = get_option( 'page_for_' . ORGNK_FAQS_CPT_NAME );
-$archive_page_slug = str_replace( home_url(), '', get_permalink( $archive_page_id ) );
-$archive_permalink = ( $archive_page_id ? $archive_page_slug : 'faqs' );
-$archive_permalink = ltrim( $archive_permalink, '/' );
-$archive_permalink = rtrim( $archive_permalink, '/' );
-define( 'ORGNK_FAQS_REWRITE_SLUG', $archive_permalink );
-
-/**
  * Main Organik_FAQs class
  */
 class Organik_FAQs {
@@ -43,11 +33,14 @@ class Organik_FAQs {
      */
 	public function __construct() {
 
+		// Define the CPT rewrite variable on init - required here because we need to use get_permalink() which isn't available when plugins are initialised
+		add_action( 'init', array( $this, 'orgnk_faqs_cpt_archive_rewrite_slug' ) );
+
 		// Register taxonomies first
 		new Organik_FAQs_Categories();
 
         // Hook into the 'init' action to add the Custom Post Type
-		add_action( 'init', array( $this, 'orgnk_faqs_cpt_register_cpt' ), 0 );
+		add_action( 'init', array( $this, 'orgnk_faqs_cpt_register' ) );
 
         // Change the title placeholder
 		add_filter( 'enter_title_here', array( $this, 'orgnk_faqs_cpt_title_placeholder' ) );
@@ -77,10 +70,10 @@ class Organik_FAQs {
 	}
 	
 	/**
-	 * orgnk_faqs_cpt_register_cpt()
-	 * Register the Events custom post type
+	 * orgnk_faqs_cpt_register()
+	 * Register the custom post type
 	 */
-	public function orgnk_faqs_cpt_register_cpt() {
+	public function orgnk_faqs_cpt_register() {
 
 		$labels = array(
 			'name'                      	=> ORGNK_FAQS_PLURAL_NAME,
@@ -141,6 +134,22 @@ class Organik_FAQs {
 			'rewrite'						=> $rewrite
 		);
 		register_post_type( ORGNK_FAQS_CPT_NAME, $args );
+	}
+
+	/**
+	 * orgnk_faqs_cpt_archive_rewrite_slug()
+	 * Conditionally define the CPT archive permalink based on the pages for CPT functionality in Organik themes
+	 * Includes a fallback string to use as the slug if the option isn't set
+	 */
+	public function orgnk_faqs_cpt_archive_rewrite_slug() {
+		$default_slug = 'faqs';
+		$archive_page_id = get_option( 'page_for_' . ORGNK_FAQS_CPT_NAME );
+		$archive_page_slug = str_replace( home_url(), '', get_permalink( $archive_page_id ) );
+		$archive_permalink = ( $archive_page_id ? $archive_page_slug : $default_slug );
+		$archive_permalink = ltrim( $archive_permalink, '/' );
+		$archive_permalink = rtrim( $archive_permalink, '/' );
+
+		define( 'ORGNK_FAQS_REWRITE_SLUG', $archive_permalink );
 	}
 
 	/**
