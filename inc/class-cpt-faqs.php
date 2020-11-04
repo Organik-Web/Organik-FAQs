@@ -65,7 +65,7 @@ class Organik_FAQs {
 		// Enqueue front-end scripts
 		add_action( 'wp_enqueue_scripts', array( $this, 'orgnk_faqs_cpt_enqueue_scripts' ) );
 
-		// Add schema for this post type to the head
+		// Add schema for this post type to the document head
 		add_action( 'wp_head', array( $this, 'orgnk_faqs_cpt_shortcode_schema_head' ) );
 	}
 	
@@ -249,7 +249,7 @@ class Organik_FAQs {
 
 		foreach( $defaults as $key => $value ) {
 			// When we find the date column, slip in the new column before it
-			if ( $key=='date' ) {
+			if ( $key == 'date' ) {
 				$new_order['menu_order'] = 'Order';
 				$new_order['id'] = 'ID';
 			}
@@ -345,8 +345,8 @@ class Organik_FAQs {
 
 		ob_start();
 
-		if ( file_exists( get_template_directory() . '/template-parts/single/faqs/shortcode-faqs.php'  )) {
-			include_once ( get_template_directory() . '/template-parts/single/faqs/shortcode-faqs.php'  );
+		if ( file_exists( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php'  )) {
+			include_once ( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php'  );
 		}  else {
 			include_once plugin_dir_path( __FILE__ ) . '../public/shortcode/shortcode.php';
 		}

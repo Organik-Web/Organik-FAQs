@@ -17,7 +17,7 @@
 
                         <?php if ( $style_class === 'list' ) : ?>
 
-                            <span class="question <?php echo $heading_level ?>"><?php echo esc_html( the_title() ) ?></span>
+                            <<?php echo $heading_level ?> class="question"><?php echo esc_html( the_title() ) ?></<?php echo $heading_level ?>>
 
                             <div class="answer">
                                 <?php echo wpautop( wp_kses_post( get_the_content() ) ) ?>

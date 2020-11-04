@@ -1,4 +1,9 @@
 <?php
+/**
+ * orgnk_faqs_schema_script()
+ * Generates the FAQ schema script for outputting in the document head
+ * Requires an array of shortcode parts to be passed
+ */
 function orgnk_faqs_schema_script( $shortcodes = NULL ) {
 
     $schema = NULL;

@@ -5,7 +5,7 @@
 define( 'ORGNK_FAQS_CATEGORIES_TAX_NAME', 'faq-categories' );
 
 /**
- * Main Organik_FAQs class
+ * Main Organik_FAQs_Categories class
  */
 class Organik_FAQs_Categories {
 
