@@ -34,7 +34,7 @@ class Organik_FAQs {
 	public function __construct() {
 
 		// Define the CPT rewrite variable on init - required here because we need to use get_permalink() which isn't available when plugins are initialised
-		add_action( 'init', array( $this, 'orgnk_faqs_cpt_archive_rewrite_slug' ) );
+		add_action( 'init', array( $this, 'orgnk_faqs_cpt_rewrite_slug' ) );
 
 		// Register taxonomies first
 		new Organik_FAQs_Categories();
@@ -54,7 +54,7 @@ class Organik_FAQs {
 		// Add 'about' page to admin menu
 		add_action( 'admin_menu', array( $this, 'orgnk_faqs_cpt_admin_about_page' ) );
 
-		// Add post meta to the admin list view
+		// Add post meta to the admin list view for this CPT
 		add_filter( 'manage_' . ORGNK_FAQS_CPT_NAME . '_posts_columns', array( $this, 'orgnk_faqs_cpt_admin_table_column' ) );
 		add_action( 'manage_' . ORGNK_FAQS_CPT_NAME . '_posts_custom_column', array( $this, 'orgnk_faqs_cpt_admin_table_content' ), 10, 2 );
 		add_filter( 'manage_edit-' . ORGNK_FAQS_CPT_NAME . '_sortable_columns', array( $this, 'orgnk_faqs_cpt_admin_table_sortable' ) );
@@ -137,11 +137,11 @@ class Organik_FAQs {
 	}
 
 	/**
-	 * orgnk_faqs_cpt_archive_rewrite_slug()
+	 * orgnk_faqs_cpt_rewrite_slug()
 	 * Conditionally define the CPT archive permalink based on the pages for CPT functionality in Organik themes
 	 * Includes a fallback string to use as the slug if the option isn't set
 	 */
-	public function orgnk_faqs_cpt_archive_rewrite_slug() {
+	public function orgnk_faqs_cpt_rewrite_slug() {
 		$default_slug = 'faqs';
 		$archive_page_id = get_option( 'page_for_' . ORGNK_FAQS_CPT_NAME );
 		$archive_page_slug = str_replace( home_url(), '', get_permalink( $archive_page_id ) );
@@ -292,7 +292,10 @@ class Organik_FAQs {
 	 */
 	public function orgnk_faqs_cpt_shortcode( $attributes ) {
 
-		$style_class = 'accordion';
+		static $instance = 0;
+		$instance++;
+
+		$display_type = 'accordion';
 
 		// Setup filter for changing the heading class in theme
 		// Can be changed with add_filter( 'orgnk_faqs_shortcode_heading', function() {	return 'h3'; });
@@ -338,17 +341,17 @@ class Organik_FAQs {
 		}
 
 		if ( isset( $attribute['style'] ) && $attribute['style'] === 'list' ) {
-			$style_class = 'list';
+			$display_type = 'list';
 		}
 
 		$faqs_loop = new WP_Query( $args );
 
 		ob_start();
 
-		if ( file_exists( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php'  )) {
-			include_once ( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php'  );
+		if ( file_exists( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php' ) ) {
+			include ( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php' );
 		}  else {
-			include_once plugin_dir_path( __FILE__ ) . '../public/shortcode/shortcode.php';
+			include plugin_dir_path( __FILE__ ) . '../public/shortcode/shortcode.php';
 		}
 
 		return ob_get_clean();
@@ -358,7 +361,7 @@ class Organik_FAQs {
 	 * orgnk_faqs_cpt_shortcode_schema_head()
 	 * Add FAQ schema to the document <head> if a [faqs] shortcode is used on a page
 	 * Uses a custom field on each post/page where the author can supply any shortcodes they have used
-	 * Note: if multiple of the same FAQ are provided in the custom field, they will be merged together by the orgnk_generate_cpt_schema_script() function
+	 * Note: if multiple of the same FAQ are provided in the custom field, they will be merged together
 	 */
 	public function orgnk_faqs_cpt_shortcode_schema_head() {
 

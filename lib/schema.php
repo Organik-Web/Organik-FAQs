@@ -17,6 +17,9 @@ function orgnk_faqs_schema_script( $shortcodes = NULL ) {
             // Attributes are stored as ["category"] => "name" so we can use them to retrieve posts in the upcoming query
             $attributes = ( isset( $shortcode[2] ) ) ? shortcode_parse_atts( $shortcode[2] ) : NULL;
 
+            // Remove unnecessary double quotes added by shortcode_parse_atts
+            $attributes = str_replace( '&quot;', '', $attributes );
+
             // Setup the post query arguments
             $args = array(
                 'post_type'         	=> ORGNK_FAQS_CPT_NAME,

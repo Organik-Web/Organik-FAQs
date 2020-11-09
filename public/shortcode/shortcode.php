@@ -1,6 +1,6 @@
 <?php if ( $faqs_loop->have_posts() ) : ?>
 
-    <div class="orgnk-faqs type-<?php echo $style_class ?>">
+    <div id="orgnk-faqs-<?php echo $instance ?>" class="orgnk-faqs type-<?php echo $display_type ?>">
         <div class="faqs-list">
 
             <?php
@@ -9,13 +9,13 @@
                 // Only display the FAQ item if it has an answer (content) set
                 if ( get_the_content() ) :
 
-                    if ( $style_class === 'list' && $faqs_loop->current_post > 0 ) : ?>
+                    if ( $display_type === 'list' && $faqs_loop->current_post > 0 ) : ?>
                         <hr>
                     <?php endif ?>
 
                     <div <?php post_class( 'entry faq-item' ) ?>>
 
-                        <?php if ( $style_class === 'list' ) : ?>
+                        <?php if ( $display_type === 'list' ) : ?>
 
                             <<?php echo $heading_level ?> class="question"><?php echo esc_html( the_title() ) ?></<?php echo $heading_level ?>>
 
