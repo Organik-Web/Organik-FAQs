@@ -57,7 +57,6 @@ class Organik_FAQs {
 		// Add post meta to the admin list view for this CPT
 		add_filter( 'manage_' . ORGNK_FAQS_CPT_NAME . '_posts_columns', array( $this, 'orgnk_faqs_cpt_admin_table_column' ) );
 		add_action( 'manage_' . ORGNK_FAQS_CPT_NAME . '_posts_custom_column', array( $this, 'orgnk_faqs_cpt_admin_table_content' ), 10, 2 );
-		add_filter( 'manage_edit-' . ORGNK_FAQS_CPT_NAME . '_sortable_columns', array( $this, 'orgnk_faqs_cpt_admin_table_sortable' ) );
 
 		// Register shortcode
 		add_shortcode( ORGNK_FAQS_SHORTCODE_NAME, array( $this, 'orgnk_faqs_cpt_shortcode' ) );
@@ -250,7 +249,6 @@ class Organik_FAQs {
 		foreach( $defaults as $key => $value ) {
 			// When we find the date column, slip in the new column before it
 			if ( $key == 'date' ) {
-				$new_order['menu_order'] = 'Order';
 				$new_order['id'] = 'ID';
 			}
 			$new_order[$key] = $value;
@@ -266,23 +264,10 @@ class Organik_FAQs {
 	public function orgnk_faqs_cpt_admin_table_content( $column_name, $post_id ) {
 			
 		global $post;
-			
-		if ( $column_name == 'menu_order' ) {
-			echo $post->menu_order;
-		}
 
 		if ( $column_name == 'id' ) {
 			echo $post_id;
 		}
-	}
-
-	/**
-	 * orgnk_faqs_cpt_admin_table_sortable()
-	 * Make the new admin list view columns sortable
-	 */
-	public function orgnk_faqs_cpt_admin_table_sortable( $columns ) {
-		$columns['menu_order'] = 'menu_order';
-		return $columns;
 	}
 
 	/**
