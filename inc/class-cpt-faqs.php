@@ -353,7 +353,7 @@ class Organik_FAQs {
 		$schema_script = NULL;
 
 		// Get shortcodes for the queried post and seperate them by line break
-        $shortcodes = esc_html( get_post_meta( get_the_ID(), 'entry_shortcode_custom_schema', true ) );
+        $shortcodes = esc_html( get_post_meta( get_the_ID(), 'entry_shortcode_schema', true ) );
         $shortcodes = preg_split('/\r\n|\r|\n/', $shortcodes);
         $shortcode_parts = array();
 
