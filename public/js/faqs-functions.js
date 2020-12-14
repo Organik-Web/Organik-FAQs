@@ -1,31 +1,36 @@
 jQuery(function ($) {
 
 	// Accordian show/hide
-	$('.orgnk-faqs.type-accordion').each(function () {
+	$('.orgnk-faqs.type-accordion').each(function() {
 
-		var question = $(this).find('.question'),
-			answer = '.answer';
+		const question = $(this).find('.question');
+		const answer = '.answer';
 
 		// Hide all answers
 		$(question).siblings(answer).hide();
 
-		$(question).on('click', function () {
+		$(question).on('click', function() {
 
 			// If the clicked question's answer is hidden
-			if ($(this).siblings(answer).is(':hidden') === true) {
+			if ( $(this).siblings(answer).is(':hidden') === true ) {
 
 				// This question and its answer
-				$(this).addClass('open').attr('aria-expanded', 'true');
+				$(this).parent().addClass('open');
+				$(this).attr('aria-expanded', 'true');
 				$(this).siblings(answer).slideDown(300).attr('aria-hidden', 'false');
 
 				// Neighbouring questions and their answers
-				$(this).parent().siblings().find(question).removeClass('open').attr('aria-expanded', 'false');
-				$(this).parent().siblings().find(question).siblings(answer).slideUp(300).attr('aria-hidden', 'true');
+				const neighbours = $(this).parent().siblings();
+
+				neighbours.removeClass('open');
+				neighbours.find(question).attr('aria-expanded', 'false');
+				neighbours.find(question).siblings(answer).slideUp(300).attr('aria-hidden', 'true');
 			} 
 
 			// If the clicked question's answer is visible
-			else if ($(this).siblings(answer).is(':hidden') === false) {
-				$(this).removeClass('open').attr('aria-expanded', 'false');
+			else if ( $(this).siblings(answer).is(':hidden') === false ) {
+				$(this).parent().removeClass('open');
+				$(this).attr('aria-expanded', 'false');
 				$(this).siblings(answer).slideUp(300).attr('aria-hidden', 'true');
 			}
 		});
