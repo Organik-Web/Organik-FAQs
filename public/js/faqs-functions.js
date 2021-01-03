@@ -1,7 +1,7 @@
 jQuery(function ($) {
 
 	// Accordian show/hide
-	$('.orgnk-faqs.type-accordion').each(function() {
+	$('.orgnk-faqs.type-accordion').each( function() {
 
 		const question = $(this).find('.question');
 		const answer = '.answer';
@@ -9,7 +9,7 @@ jQuery(function ($) {
 		// Hide all answers
 		$(question).siblings(answer).hide();
 
-		$(question).on('click', function() {
+		$(question).on( 'click', function() {
 
 			// If the clicked question's answer is hidden
 			if ( $(this).siblings(answer).is(':hidden') === true ) {
