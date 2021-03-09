@@ -65,7 +65,7 @@ function orgnk_faqs_schema_script( $shortcodes = NULL ) {
                         'name' 				=> esc_html( get_the_title() ),
                         'acceptedAnswer'	=> array(
                             '@type'     		=> 'Answer',
-                            'name' 				=> esc_html( get_the_content() )
+                            'text' 				=> get_the_content()
                         )
                     );
 
@@ -80,8 +80,6 @@ function orgnk_faqs_schema_script( $shortcodes = NULL ) {
         }
     }
 
-
-    
     // Check if anything has been stored for output
     if ( $sub_schema ) {
 
@@ -94,7 +92,6 @@ function orgnk_faqs_schema_script( $shortcodes = NULL ) {
 
     // Finally, check if there is any compiled schema to return
     if ( $schema ) {
-        // var_dump( json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) );
-        return '<script type="application/ld+json" class="organik-faqs-schema">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>';
+        return '<script type="application/ld+json" class="organik-faqs-schema">' . json_encode( $schema, JSON_PRETTY_PRINT ) . '</script>';
     }
 }

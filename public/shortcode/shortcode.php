@@ -9,9 +9,7 @@
                 // Only display the FAQ item if it has an answer (content) set
                 if ( get_the_content() ) :
 
-                    if ( $display_type === 'list' && $faqs_loop->current_post > 0 ) : ?>
-                        <hr>
-                    <?php endif ?>
+                    if ( $display_type === 'list' && $faqs_loop->current_post > 0 ) echo '<hr>' ?>
 
                     <div <?php post_class( 'entry faq-item' ) ?>>
 
@@ -28,7 +26,7 @@
                             <button id="faq-<?php the_ID() ?>" class="question" aria-expanded="false" aria-controls="faq-<?php the_ID() ?>-answer">
                                 <div class="button-inner">
                                     <?php echo esc_html( the_title() ) ?>
-                                    <i class="icon"></i>
+                                    <i class="icon" aria-hidden="true"></i>
                                 </div>
                             </button>
 
