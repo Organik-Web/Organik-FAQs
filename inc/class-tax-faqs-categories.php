@@ -2,7 +2,7 @@
 /**
  * Define constant variables
  */
-define( 'ORGNK_FAQS_CATEGORIES_TAX_NAME', 'faq-categories' );
+define( 'ORGNK_FAQS_CATEGORIES_TAX_NAME', 'faq-category' );
 
 /**
  * Main Organik_FAQs_Categories class
@@ -15,13 +15,13 @@ class Organik_FAQs_Categories {
 	public function __construct() {
 
 		// Register taxonomies
-		add_action( 'init', array( $this, 'orgnk_faq_categories_register_taxonomy') );
+		add_action( 'init', array( $this, 'orgnk_faqs_categories_register_taxonomy') );
 	}
 
 	/**
 	 * Register taxonomy
 	 */
-	public function orgnk_faq_categories_register_taxonomy() {
+	public function orgnk_faqs_categories_register_taxonomy() {
 
 		$labels = array(
 			'name'                       	=> 'FAQ Categories',

@@ -7,6 +7,13 @@
 
     <br><hr><br>
 
+    <h3>FAQs display style</h3>
+    <p>By default, FAQs are displayed in an accordion that the user can expand and collapse. If you would like to display the FAQs like normal page content, you can set the 'style' parameter to 'list'.</p>
+    <code style="display: block; font-family: monospace; margin: 0 0 1em 0; font-size: 16px; background-color: #fff; padding: 10px; border-radius: 4px;">[<?php echo ORGNK_FAQS_SHORTCODE_NAME ?> style="list"]</code></p>
+    <p><strong>Note:</strong> The 'style' parameter is only applied to each instance of an FAQ shortcode.</p>
+
+    <br><hr><br>
+
     <h3>Displaying a category of FAQs</h3>
     <p>If you plan to use FAQs to cover multiple topics, or want to be able to control which questions appear in different areas of your website, then you'll need to use categories.</p>
     <p>First, you'll need decide which categories you think you'll need.</p>
@@ -23,11 +30,4 @@
     <p>If you only want a single FAQs page, with all of your FAQs displayed, then you don't need to use categories, and you can simply use the following shortcode to display all FAQs.</p>
     <code style="display: block; font-family: monospace; margin: 0 0 1em 0; font-size: 16px; background-color: #fff; padding: 10px; border-radius: 4px;">[<?php echo ORGNK_FAQS_SHORTCODE_NAME ?>]</code></p>
     <p><strong>Note:</strong> This shortcode will always display all FAQs, even if you are using categories.</p>
-
-    <br><hr><br>
-
-    <h3>FAQs display style</h3>
-    <p>By default, FAQs are displayed in an accordion that the user can expand and collapse. If you would like to display the FAQs like normal page content, you can set the 'style' parameter to 'list'.</p>
-    <code style="display: block; font-family: monospace; margin: 0 0 1em 0; font-size: 16px; background-color: #fff; padding: 10px; border-radius: 4px;">[<?php echo ORGNK_FAQS_SHORTCODE_NAME ?> style="list"]</code></p>
-    <p><strong>Note:</strong> The 'style' parameter is only applied to each instance of an FAQ shortcode.</p>
 </div>

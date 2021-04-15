@@ -319,18 +319,22 @@ class Organik_FAQs {
 			}
 		}
 
+		// If IDs are specified in the shortcode, conver the IDs into an array so we can add it to the query arguments
 		if ( isset( $attribute['id'] ) ) {
 			$post_ids = preg_replace('/\s+/', '', $attribute['id'] ); // Remove all whitespace
 			$post_ids = explode( ',', $post_ids ); // Convert string to array by comma seperation
 			$args['post__in'] = $post_ids;
 		}
 
+		// If the style attribute is set to list in the shortcode, then force the display type to be 'list'
 		if ( isset( $attribute['style'] ) && $attribute['style'] === 'list' ) {
 			$display_type = 'list';
 		}
 
+		// Run the query
 		$faqs_loop = new WP_Query( $args );
 
+		// Begin output
 		ob_start();
 
 		if ( file_exists( get_template_directory() . '/template-parts/shortcodes/shortcode-faqs.php' ) ) {
