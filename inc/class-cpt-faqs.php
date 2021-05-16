@@ -27,7 +27,7 @@ class Organik_FAQs {
         }
         return self::$instance;
 	}
-	
+
 	/**
      * Constructor function
      */
@@ -67,7 +67,7 @@ class Organik_FAQs {
 		// Add schema for this post type to the document head
 		add_action( 'wp_head', array( $this, 'orgnk_faqs_cpt_shortcode_schema_head' ) );
 	}
-	
+
 	/**
 	 * orgnk_faqs_cpt_register()
 	 * Register the custom post type
@@ -103,14 +103,14 @@ class Organik_FAQs {
 			'items_list_navigation' 		=> 'FAQs list navigation',
 			'filter_items_list'     		=> 'Filter FAQs list'
 		);
-	
+
 		$rewrite = array(
 			'slug'                  		=> ORGNK_FAQS_REWRITE_SLUG, // The slug for single posts
 			'with_front'            		=> false,
 			'pages'                 		=> true,
 			'feeds'                 		=> false
 		);
-	
+
 		$args = array(
 			'label'                 		=> ORGNK_FAQS_SINGLE_NAME,
 			'description'           		=> 'Manage and display FAQs',
@@ -159,7 +159,7 @@ class Organik_FAQs {
         wp_enqueue_script( 'faqs', plugin_dir_url( __FILE__ ) . '../public/js/faqs-functions.min.js', array('jquery'), ORGNK_FAQS_VERSION, true );
     }
 
-	/** 
+	/**
 	 * orgnk_faqs_cpt_title_placeholder()
 	 * Change CPT title placeholder on edit screen
 	 */
@@ -222,10 +222,10 @@ class Organik_FAQs {
 	public function orgnk_faqs_cpt_admin_about_page() {
 		add_submenu_page(
 			'edit.php?post_type=' . ORGNK_FAQS_CPT_NAME,
-			'About ' . ORGNK_FAQS_PLURAL_NAME, 
-			'About ' . ORGNK_FAQS_PLURAL_NAME, 
-			'edit_pages', 
-			'about-' . ORGNK_FAQS_CPT_NAME, 
+			'About ' . ORGNK_FAQS_PLURAL_NAME,
+			'About ' . ORGNK_FAQS_PLURAL_NAME,
+			'edit_pages',
+			'about-' . ORGNK_FAQS_CPT_NAME,
 			array( $this, 'orgnk_faqs_cpt_admin_about_page_content' )
 		);
 	}
@@ -243,7 +243,7 @@ class Organik_FAQs {
 	 * Register new column(s) in admin list view
 	 */
 	public function orgnk_faqs_cpt_admin_table_column( $defaults ) {
-		
+
 		$new_order = array();
 
 		foreach( $defaults as $key => $value ) {
@@ -262,7 +262,7 @@ class Organik_FAQs {
 	 * Return the content for the new admin list view columns for each post
 	 */
 	public function orgnk_faqs_cpt_admin_table_content( $column_name, $post_id ) {
-			
+
 		global $post;
 
 		if ( $column_name == 'id' ) {

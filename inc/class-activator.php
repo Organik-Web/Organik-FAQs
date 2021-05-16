@@ -10,7 +10,7 @@ class Organik_FAQs_Activator {
 	public static function activate() {
         flush_rewrite_rules();
     }
-    
+
     /**
 	 * Deactivation behaviour
 	 */

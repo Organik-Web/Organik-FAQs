@@ -45,13 +45,13 @@ class Organik_FAQs_Categories {
 			'items_list'                 	=> 'Categories list',
 			'items_list_navigation'      	=> 'Categories list navigation'
 		);
-	
+
 		$rewrite = array(
 			'slug'                  		=> ORGNK_FAQS_REWRITE_SLUG . '/category',
 			'with_front'            		=> false,
 			'hierarchical'					=> true
 		);
-	
+
 		$args = array(
 			'labels'                     	=> $labels,
 			'hierarchical'               	=> true,

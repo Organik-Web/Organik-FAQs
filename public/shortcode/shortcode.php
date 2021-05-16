@@ -23,20 +23,20 @@
 
                         <?php else : ?>
 
-                            <button id="faq-<?php the_ID() ?>" class="question" aria-expanded="false" aria-controls="faq-<?php the_ID() ?>-answer">
+                            <button id="faq-<?php the_ID() ?>" class="question" aria-controls="faq-<?php the_ID() ?>-answer" aria-expanded="false">
                                 <div class="button-inner">
                                     <?php echo esc_html( the_title() ) ?>
                                     <i class="icon" aria-hidden="true"></i>
                                 </div>
                             </button>
 
-                            <div id="faq-<?php the_ID() ?>-answer" class="answer" role="region" aria-labelledby="faq-<?php the_ID() ?>" aria-hidden="true">
+                            <div id="faq-<?php the_ID() ?>-answer" class="answer" aria-labelledby="faq-<?php the_ID() ?>" role="region">
                                 <?php echo wpautop( wp_kses_post( get_the_content() ) ) ?>
                             </div>
 
                         <?php endif ?>
                     </div>
-                <?php endif; 
+                <?php endif;
             endwhile; wp_reset_postdata() ?>
         </div>
     </div>
