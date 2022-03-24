@@ -182,7 +182,7 @@ class Organik_FAQs {
 		$screen = get_current_screen();
 
 		if ( $screen && $screen->post_type == ORGNK_FAQS_CPT_NAME ) {
-			$settings['teeny'] = true;
+			$settings['teeny'] = false;
 			$settings['media_buttons'] = false;
 		}
 
@@ -346,8 +346,9 @@ class Organik_FAQs {
 		return ob_get_clean();
 	}
 
+
 	/**
-	 * orgnk_faqs_cpt_shortcode_schema_head()
+	 * orgnk_faqs_cpt_shortcode_schema_head_automated()
 	 * Add FAQ schema to the document <head> if a [faqs] shortcode is used on a page
 	 * Uses a custom field on each post/page where the author can supply any shortcodes they have used
 	 * Note: if multiple of the same FAQ are provided in the custom field, they will be merged together
@@ -357,7 +358,12 @@ class Organik_FAQs {
 		$schema_script = NULL;
 
 		// Get shortcodes for the queried post and seperate them by line break
-        $shortcodes = esc_html( get_post_meta( get_the_ID(), 'entry_shortcode_schema', true ) );
+		if ( function_exists( 'orgnk_get_the_ID' ) && orgnk_get_the_ID() ) {
+			$shortcodes = esc_html( get_post_meta( orgnk_get_the_ID(), 'entry_shortcode_schema', true ) );
+		} else {
+			$shortcodes = esc_html( get_post_meta( get_the_ID(), 'entry_shortcode_schema', true ) );
+		}
+
         $shortcodes = preg_split('/\r\n|\r|\n/', $shortcodes);
         $shortcode_parts = array();
 
