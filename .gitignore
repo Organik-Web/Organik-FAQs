@@ -25,3 +25,6 @@ bower_components/
 
 # ignore CodeKit config files
 *.codekit3
+
+# ignore composer files
+vendor/
